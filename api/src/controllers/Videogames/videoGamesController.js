@@ -2,7 +2,7 @@ require('dotenv').config();
 const axios = require('axios');
 const { Videogame, Genre } = require('../../db');
 const { API_KEY } = process.env;
-const cleanArray = require('../../utils/Videogames/VideogameUtils');
+const { cleanArray, removeTags } = require('../../utils/Videogames/VideogameUtils');
 const { Op } = require('sequelize');
 
 const videoGamesController = async () => {
@@ -49,7 +49,7 @@ const videoGameByIdController = async (id, source) => {
             platforms: source === 'api' ? data.platforms?.map(platform => platform.platform.name).join(', ') : data.platforms,
             genres: source === 'api' ? data.genres?.map(genre => genre.name) : data.Genres?.map(genre => genre.name),
             image: data.background_image,
-            description: source === 'api' ? data.description_raw : data.description,
+            description: removeTags(data.description),
             released: data.released,
             rating: data.rating,
             created: source === 'api' ? false : data.created
