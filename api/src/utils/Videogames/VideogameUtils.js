@@ -6,7 +6,7 @@ const cleanArray = (arr) =>
             description: data.description_raw,
             platforms: data.platforms.map(platform => platform.platform.name).join(', '),
             genres: data.genres.map(genres => genres.name),
-            image: data.background_image,
+            image: data.background_image || data.image,
             released: data.released,
             rating: data.rating,
             created: false
@@ -19,7 +19,17 @@ const removeTags = (description) => {
     return description;
 }
 
+const cleanGenreVideoGame = (arr) => {
+    return arr.map((game) => {
+        const formattedGame = game.toJSON();
+        formattedGame.genres = game.Genres.map((genre) => genre.name);
+        delete formattedGame.Genres;
+        return formattedGame;
+    });
+};
+
 module.exports = {
     cleanArray,
-    removeTags
+    removeTags,
+    cleanGenreVideoGame
 };

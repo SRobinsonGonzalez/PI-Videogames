@@ -1,11 +1,9 @@
 require('dotenv').config();
 
 const { Sequelize } = require('sequelize');
-const fs = require('fs');
-const path = require('path');
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_BDD } = process.env;
 const VideogameFunction = require('./models/Videogame');
-const GenreFunction = require('./models/Genre')
+const GenreFunction = require('./models/Genre');
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_BDD}`, {
   logging: false, // set to console.log to see the raw SQL queries
@@ -15,7 +13,7 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
 VideogameFunction(sequelize);
 GenreFunction(sequelize);
 
-const { Videogame, User, Favorite, Genre } = sequelize.models;
+const { Videogame, Genre, Platform, Favorite, User } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);

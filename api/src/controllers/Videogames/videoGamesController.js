@@ -2,7 +2,7 @@ require('dotenv').config();
 const axios = require('axios');
 const { Videogame, Genre } = require('../../db');
 const { API_KEY } = process.env;
-const { cleanArray, removeTags } = require('../../utils/Videogames/VideogameUtils');
+const { cleanArray, removeTags, cleanGenreVideoGame} = require('../../utils/Videogames/VideogameUtils');
 const { Op } = require('sequelize');
 
 const videoGamesController = async () => {
@@ -10,20 +10,20 @@ const videoGamesController = async () => {
         const dbVideoGames = await Videogame.findAll({
             include: {
                 model: Genre,
-                attributes: ['id', 'name']
+                attributes: ['name']
             }
         });
-        const dbVideoGamesWithGenres = dbVideoGames.map((game) => ({
-            ...game.toJSON(), //! Convierte el objeto Sequelize a JSON
-            Genres: game.Genres.map((genre) => genre.name),
-        }));
+
+        const cleanGame = cleanGenreVideoGame(dbVideoGames);
+
         const { data } = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`);
         const videoGames = data.results;
         if (!videoGames) {
             throw new Error('No videogames information found');
         }
+
         const apiGames = cleanArray(videoGames);
-        return [...dbVideoGamesWithGenres, ...apiGames];
+        return [...cleanGame, ...apiGames];
     } catch (error) {
         throw error
     };
@@ -36,7 +36,7 @@ const videoGameByIdController = async (id, source) => {
             : await Videogame.findByPk(id, {
                 include: {
                     model: Genre,
-                    attributes: ['id', 'name']
+                    attributes: ['name']
                 }
             })
         if (!response) {
@@ -48,7 +48,7 @@ const videoGameByIdController = async (id, source) => {
             name: data.name,
             platforms: source === 'api' ? data.platforms?.map(platform => platform.platform.name).join(', ') : data.platforms,
             genres: source === 'api' ? data.genres?.map(genre => genre.name) : data.Genres?.map(genre => genre.name),
-            image: data.background_image,
+            image: source === 'api' ? data.background_image : data.image,
             description: removeTags(data.description),
             released: data.released,
             rating: data.rating,
@@ -67,14 +67,10 @@ const videoGameByNameController = async (name) => {
             limit: 15,
             include: {
                 model: Genre,
-                attributes: ['id', 'name']
+                attributes: ['name']
             }
         });
-
-        const dbVideoGamesWithGenres = dbGames.map((game) => ({
-            ...game.toJSON(), //! Convierte el objeto Sequelize a JSON
-            Genres: game.Genres.map((genre) => genre.name),
-        }));
+        const cleanGame = cleanGenreVideoGame(dbGames)
 
         const { data } = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`);
         const response = data.results;
@@ -83,7 +79,7 @@ const videoGameByNameController = async (name) => {
         const filterApi = apiGame.filter((game) => game.name.toLowerCase() === name.toLowerCase());
         const apiResults = filterApi.slice(0, 15);
 
-        return [...dbVideoGamesWithGenres, ...apiResults];
+        return [...cleanGame, ...apiResults];
     } catch (error) {
         throw error;
     }
@@ -91,7 +87,7 @@ const videoGameByNameController = async (name) => {
 
 const createVideoGameController = async (name, platforms, genres, image, description, released, rating) => {
     try {
-        if (!genres || genres.length === 0) {
+        if (!genres.length) {
             throw new Error('You must provide at least one genre');
         }
         const genre = await Genre.findAll({ where: { name: genres } });
@@ -103,7 +99,7 @@ const createVideoGameController = async (name, platforms, genres, image, descrip
             released,
             rating,
         });
-        await newVideoGame.addGenres(genre); //!
+        await newVideoGame.addGenres(genre);
         return newVideoGame;
     } catch (error) {
         throw error;
