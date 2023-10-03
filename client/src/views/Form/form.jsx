@@ -1,8 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { getAllGenres } from "../../redux/Actions/actions";
+import Validation from "./validation";
 
-const Form = () => {
+const Form = ({ createVideoGameController }) => {
     const genres = useSelector((state) => state.genres);
     const dispatch = useDispatch()
 
@@ -20,24 +21,61 @@ const Form = () => {
         rating: "",
     });
 
+    const [errors, setErrors] = useState({
+        name: "",
+        description: "",
+        platforms: "",
+        genres: [],
+        image: "",
+        released: "",
+        rating: "",
+    });
+
     const changeHandler = (event) => {
         const property = event.target.name;
-        const value = event.target.type === "file" ? event.target.files[0] : event.target.value;
+        const value = event.target.value;
 
         if (property === "genres") {
             const genreName = event.target.value;
             if (!form.genres.includes(genreName)) {
-                setForm({ ...form, genres: [...form.genres, genreName] });
-            }
+                setForm({
+                    ...form,
+                    genres: [...form.genres, genreName]
+                });
+            };
+            return;
         } else {
-            setForm({ ...form, [property]: value });
+            setForm({
+                ...form,
+                [property]: value
+            });
+        };
+        setErrors(
+            Validation({
+                ...form,
+                [property]: value
+            })
+        );
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        const validationForm = Validation(form);
+        setErrors(validationForm);
+
+        const hasErrors = Object.values(validationForm).some((error) => !!error);
+        if (!hasErrors) {
+            createVideoGameController(form);
+        } else {
+            alert('There are errors in the form. Cannot submit')
         }
     };
 
     return (
         <div>
             <h1>New Video Game Registration</h1>
-            <form>
+            <form encType="multipart/form-data" onSubmit={handleSubmit}>
                 <div>
                     <label>Name:
                         <input
@@ -45,8 +83,10 @@ const Form = () => {
                             type="text"
                             name="name"
                             autoComplete="name"
-                            onChange={changeHandler}>
+                            onChange={changeHandler}
+                            style={{ borderColor: errors.name ? 'red' : 'initial' }}>
                         </input>
+                        {errors.name && <p>{errors.name}</p>}
                     </label>
                 </div>
 
@@ -58,6 +98,7 @@ const Form = () => {
                             rows="4"
                             onChange={changeHandler}>
                         </textarea>
+                        {errors.description && <p>{errors.description}</p>}
                     </label>
                 </div>
 
@@ -67,8 +108,10 @@ const Form = () => {
                             value={form.platforms}
                             type="text"
                             name="platforms"
-                            onChange={changeHandler}>
+                            onChange={changeHandler}
+                            style={{ borderColor: errors.platforms ? 'red' : 'initial' }}>
                         </input>
+                        {errors.platforms && <p>{errors.platforms}</p>}
                     </label>
                 </div>
 
@@ -88,6 +131,7 @@ const Form = () => {
                                 </option>
                             ))}
                         </select>
+                        {errors.genres && <p>{errors.genres}</p>}
                     </label>
                 </div>
 
@@ -98,15 +142,9 @@ const Form = () => {
                             type="file"
                             name="image"
                             accept="image/*"
-                            onChange={changeHandler}>
-                        </input>
-                        {form.image && (
-                            <div>
-                                <label>
-                                    <img src={URL.createObjectURL(form.image)} alt="Selected" />
-                                </label>
-                            </div>
-                        )}
+                            onChange={changeHandler}
+                        />
+                        {errors.image && <p>{errors.image}</p>}
                     </label>
                 </div>
 
@@ -119,6 +157,7 @@ const Form = () => {
                             autoComplete="off"
                             onChange={changeHandler}>
                         </input>
+                        {errors.released && <p>{errors.released}</p>}
                     </label>
                 </div>
 
@@ -133,6 +172,7 @@ const Form = () => {
                             step="0.1"
                             onChange={changeHandler}>
                         </input>
+                        {errors.rating && <p>{errors.rating}</p>}
                     </label>
                 </div>
 
