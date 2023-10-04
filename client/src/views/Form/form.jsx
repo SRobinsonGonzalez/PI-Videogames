@@ -2,8 +2,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { getAllGenres } from "../../redux/Actions/actions";
 import Validation from "./validation";
+import axios from "axios";
 
-const Form = ({ createVideoGameController }) => {
+const Form = () => {
     const genres = useSelector((state) => state.genres);
     const dispatch = useDispatch()
 
@@ -60,13 +61,14 @@ const Form = ({ createVideoGameController }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
         const validationForm = Validation(form);
         setErrors(validationForm);
-
         const hasErrors = Object.values(validationForm).some((error) => !!error);
+
         if (!hasErrors) {
-            createVideoGameController(form);
+            axios.post('http://localhost:3001/videogames', form)
+                .then((response) => alert(response))
+                .catch((error) => alert("Error creating video game"));
         } else {
             alert('There are errors in the form. Cannot submit')
         }
@@ -139,9 +141,9 @@ const Form = ({ createVideoGameController }) => {
                     <label>Image:
                         <input
                             value={form.image}
-                            type="file"
+                            type="text"
                             name="image"
-                            accept="image/*"
+                            placeholder="Enter Image URL"
                             onChange={changeHandler}
                         />
                         {errors.image && <p>{errors.image}</p>}
@@ -185,77 +187,3 @@ const Form = ({ createVideoGameController }) => {
 };
 
 export default Form;
-
-// import { useState } from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import { useEffect } from "react";
-// import { getAllGenres } from "../../redux/Actions/actions";
-
-// const Form = () => {
-//     const genres = useSelector((state) => state.genres);
-//     const dispatch = useDispatch();
-//     const [selectedGenres, setSelectedGenres] = useState([]); // Estado local para las opciones seleccionadas
-
-//     useEffect(() => {
-//         dispatch(getAllGenres());
-//     }, []);
-
-// Manejar el cambio de las opciones seleccionadas
-//     const handleGenreChange = (event) => {
-//         const genreName = event.target.value;
-//         if (event.target.checked) {
-// Agregar género a la lista si está marcado
-//             setSelectedGenres([...selectedGenres, genreName]);
-//         } else {
-// Quitar género de la lista si está desmarcado
-//             setSelectedGenres(selectedGenres.filter((genre) => genre !== genreName));
-//         }
-//     };
-
-//     return (
-//         <div>
-//             <h1>New Video Game Registration</h1>
-//             <form>
-//                 {/* ... (otros campos de formulario) */}
-
-//                 <div>
-//                     <label>Genres:
-//                         <div>
-//                             {genres.map((genre) => (
-//                                 <label key={genre.id}>
-//                                     <input
-//                                         type="checkbox"
-//                                         name="genre"
-//                                         value={genre.name}
-//                                         checked={selectedGenres.includes(genre.name)}
-//                                         onChange={handleGenreChange}
-//                                     />
-//                                     {genre.name}
-//                                 </label>
-//                             ))}
-//                         </div>
-//                     </label>
-//                 </div>
-
-//                 {/* ... (otros campos de formulario) */}
-//             </form>
-
-//             {/* Lista de géneros seleccionados */}
-// {
-//     selectedGenres.length > 0 && (
-//         <div>
-//             <h2>Selected Genres:</h2>
-//             <ul>
-//                 {selectedGenres.map((genre, index) => (
-//                     <li key={index}>{genre}</li>
-//                 ))}
-//             </ul>
-//         </div>
-//     )
-// }
-// </div>
-//     );
-// };
-
-// export default Form;
-

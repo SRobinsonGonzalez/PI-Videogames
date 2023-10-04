@@ -37,13 +37,13 @@ const getVideogamesByNameHandler = async (req, res) => {
     }
 };
 
-//? POST ___________________________________________
+//? POST ______________________________________________________________________________________________
 
 const postVideogamesHandler = async (req, res) => {
     try {
         const { name, platforms, genres, image, description, released, rating } = req.body;
         const newVideoGame = await createVideoGameController(name, platforms, genres, image, description, released, rating);
-        res.status(200).json(newVideoGame);
+        res.status(200).send('Successfully created');
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
