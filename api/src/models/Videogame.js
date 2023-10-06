@@ -24,7 +24,8 @@ module.exports = (sequelize) => {
     },
     image: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 'https://i.ytimg.com/vi/b9mTQ9LOs9k/maxresdefault.jpg'
     },
     released: {
       type: DataTypes.DATEONLY,

@@ -1,8 +1,5 @@
 import axios from "axios";
-export const GET_VIDEOGAMES = "GET_VIDEOGAMES";
-export const GET_DETAIL = "GET_DETAIL";
-export const CLEAR_DETAIL = "CLEAR_DETAIL";
-export const GET_GENRES = "GET_GENRES";
+import { CLEAR_DETAIL, FILTER_GAME, GET_DETAIL, GET_GAME_BYNAME, GET_GENRES, GET_VIDEOGAMES } from "./actionsTypes";
 
 export const getAllVideoGames = () => {
     try {
@@ -49,5 +46,30 @@ export const getAllGenres = () => {
         };
     } catch (error) {
         throw Error(error.message);
+    }
+};
+
+export const getGameByName = (name) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`http://localhost:3001/videogames?name=${name}`);
+            if (response.data.length === 0) {
+                throw new Error('Not Found');
+            }
+            return dispatch({
+                type: GET_GAME_BYNAME,
+                payload: data
+            });
+        } catch (error) {
+            throw Error('This game does not exist');
+        }
+    };
+};
+
+export const fiterVideoGames = (genres) => {
+    console.log(genres);
+    return {
+        type: FILTER_GAME,
+        payload: genres
     }
 };

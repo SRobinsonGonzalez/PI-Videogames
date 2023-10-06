@@ -31,6 +31,8 @@ const Validation = (input) => {
     }
     if (!input.rating) {
         errors.rating = "Enter a rating";
+    } else if (parseFloat(input.rating) < 1 || parseFloat(input.rating) > 5) {
+        errors.rating = "Rating must be between 1 and 5";
     }
     return errors;
 }

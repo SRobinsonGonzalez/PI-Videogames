@@ -7,7 +7,6 @@ const getGenresHandler = async (req, res) => {
         if (!existGenres.length) {
             const genresData = await getGenresController()
             await Genre.bulkCreate(genresData);
-            
         }
         const allGenres = await Genre.findAll();
         res.status(200).json(allGenres);

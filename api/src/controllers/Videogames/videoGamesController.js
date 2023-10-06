@@ -2,7 +2,7 @@ require('dotenv').config();
 const axios = require('axios');
 const { Videogame, Genre } = require('../../db');
 const { API_KEY } = process.env;
-const { cleanArray, removeTags, cleanGenreVideoGame} = require('../../utils/Videogames/VideogameUtils');
+const { cleanArray, removeTags, cleanGenreVideoGame } = require('../../utils/Videogames/VideogameUtils');
 const { Op } = require('sequelize');
 
 const videoGamesController = async () => {
@@ -15,6 +15,10 @@ const videoGamesController = async () => {
         });
 
         const cleanGame = cleanGenreVideoGame(dbVideoGames);
+
+        const AllGamesNeed = 100
+        const pageGames = 20
+        const totalPageGames =Math.ceil(pageGames/AllGamesNeed);
 
         const { data } = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`);
         const videoGames = data.results;
@@ -90,6 +94,12 @@ const createVideoGameController = async (name, platforms, genres, image, descrip
         if (!genres.length) {
             throw new Error('You must provide at least one genre');
         }
+        // const existingGame = await Videogame.findOne({
+        //     where: { name: { [Op.iLike]: "%game.name%" }, created: true },
+        // });
+        // if (existingGame)
+        //     throw new Error(A game called: ${ game.name } already exists);
+        
         const genre = await Genre.findAll({ where: { name: genres } });
         const newVideoGame = await Videogame.create({
             name,

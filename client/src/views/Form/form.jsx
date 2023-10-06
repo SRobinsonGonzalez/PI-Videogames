@@ -67,7 +67,7 @@ const Form = () => {
 
         if (!hasErrors) {
             axios.post('http://localhost:3001/videogames', form)
-                .then((response) => alert(response))
+                .then((response) => alert('Successfully created'))
                 .catch((error) => alert("Error creating video game"));
         } else {
             alert('There are errors in the form. Cannot submit')
@@ -169,8 +169,6 @@ const Form = () => {
                             value={form.rating}
                             type="number"
                             name="rating"
-                            min="1"
-                            max="5"
                             step="0.1"
                             onChange={changeHandler}>
                         </input>
