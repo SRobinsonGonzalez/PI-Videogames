@@ -12,7 +12,7 @@ const Card = ({ id, name, platforms, genres, image, rating }) => {
             <Link to={`/detail/${id}`}>
                 <img src={image} alt={name} />
             </Link>
-            {/* <p>Rating: {rating}</p> */}
+            <p>Rating: {rating}</p>
         </div>
     )
 };

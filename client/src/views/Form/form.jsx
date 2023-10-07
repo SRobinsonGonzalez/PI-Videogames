@@ -126,7 +126,7 @@ const Form = () => {
                             onChange={changeHandler}>
                             {genres.map((genre) => (
                                 <option
-                                    type="checkbox"
+                                    type="input"
                                     key={genre.id}
                                     value={genre.name}>
                                     {genre.name}

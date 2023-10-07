@@ -1,5 +1,16 @@
 import axios from "axios";
-import { CLEAR_DETAIL, FILTER_GAME, GET_DETAIL, GET_GAME_BYNAME, GET_GENRES, GET_VIDEOGAMES } from "./actionsTypes";
+import {
+    ALPHABETICAL_ORDER,
+    CLEAR_DETAIL,
+    FILTER_GAME,
+    GET_CREATED,
+    GET_DETAIL,
+    GET_GAME_BYNAME,
+    GET_GENRES,
+    GET_UNCREATED,
+    GET_VIDEOGAMES,
+    RATING_ORDER
+} from "./actionsTypes";
 
 export const getAllVideoGames = () => {
     try {
@@ -53,7 +64,7 @@ export const getGameByName = (name) => {
     return async (dispatch) => {
         try {
             const { data } = await axios.get(`http://localhost:3001/videogames?name=${name}`);
-            if (response.data.length === 0) {
+            if (data.length === 0) {
                 throw new Error('Not Found');
             }
             return dispatch({
@@ -67,9 +78,34 @@ export const getGameByName = (name) => {
 };
 
 export const fiterVideoGames = (genres) => {
-    console.log(genres);
     return {
         type: FILTER_GAME,
         payload: genres
+    }
+};
+
+export const getCreated = () => {
+    return {
+        type: GET_CREATED
+    }
+};
+
+export const getUnCreated = () => {
+    return {
+        type: GET_UNCREATED
+    }
+};
+
+export const alphabeticalOrder = (order) => {
+    return {
+        type: ALPHABETICAL_ORDER,
+        payload: order
+    }
+};
+
+export const ratingOrder = (order) => {
+    return {
+        type: RATING_ORDER,
+        payload: order
     }
 };

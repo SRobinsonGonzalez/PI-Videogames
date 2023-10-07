@@ -7,6 +7,26 @@ const { Op } = require('sequelize');
 
 const videoGamesController = async () => {
     try {
+        const AllGamesNeed = 100;
+        const pageGames = 20;
+        const totalPageGames = Math.ceil(AllGamesNeed / pageGames);
+        const resultGames = [];
+        let currentPage = 1;
+
+        while (resultGames.length < AllGamesNeed && currentPage <= totalPageGames) {
+            const { data } = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=${currentPage}`);
+            const videoGames = data.results;
+
+            if (!videoGames) {
+                throw new Error('No videogames information found');
+            }
+
+            const apiGames = cleanArray(videoGames);
+            resultGames.push(...apiGames);
+
+            currentPage++;
+        }
+
         const dbVideoGames = await Videogame.findAll({
             include: {
                 model: Genre,
@@ -16,22 +36,12 @@ const videoGamesController = async () => {
 
         const cleanGame = cleanGenreVideoGame(dbVideoGames);
 
-        const AllGamesNeed = 100
-        const pageGames = 20
-        const totalPageGames =Math.ceil(pageGames/AllGamesNeed);
-
-        const { data } = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`);
-        const videoGames = data.results;
-        if (!videoGames) {
-            throw new Error('No videogames information found');
-        }
-
-        const apiGames = cleanArray(videoGames);
-        return [...cleanGame, ...apiGames];
+        return [...cleanGame, ...resultGames];
     } catch (error) {
-        throw error
-    };
+        throw error;
+    }
 };
+
 
 const videoGameByIdController = async (id, source) => {
     try {
@@ -99,7 +109,7 @@ const createVideoGameController = async (name, platforms, genres, image, descrip
         // });
         // if (existingGame)
         //     throw new Error(A game called: ${ game.name } already exists);
-        
+
         const genre = await Genre.findAll({ where: { name: genres } });
         const newVideoGame = await Videogame.create({
             name,
