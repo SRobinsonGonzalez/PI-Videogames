@@ -8,3 +8,4 @@ export const GET_CREATED = "GET_CREATED"
 export const GET_UNCREATED = "GET_UNCREATED"
 export const ALPHABETICAL_ORDER = "ALPHABETICAL_ORDER"
 export const RATING_ORDER = "RATING_ORDER"
+export const PAGINATE = "PAGINATE";

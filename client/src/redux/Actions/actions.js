@@ -9,6 +9,7 @@ import {
     GET_GENRES,
     GET_UNCREATED,
     GET_VIDEOGAMES,
+    PAGINATE,
     RATING_ORDER
 } from "./actionsTypes";
 
@@ -109,3 +110,16 @@ export const ratingOrder = (order) => {
         payload: order
     }
 };
+
+export const paginateGames = (order) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: PAGINATE,
+                payload: order,
+            });
+        } catch (error) {
+            alert(error.response.data.error);
+        }
+    }
+}

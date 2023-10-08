@@ -1,18 +1,20 @@
-import { ALPHABETICAL_ORDER, CLEAR_DETAIL, FILTER_GAME, GET_CREATED, GET_DETAIL, GET_GAME_BYNAME, GET_GENRES, GET_UNCREATED, GET_VIDEOGAMES, RATING_ORDER } from "../Actions/actionsTypes";
+import { ALPHABETICAL_ORDER, CLEAR_DETAIL, FILTER_GAME, GET_CREATED, GET_DETAIL, GET_GAME_BYNAME, GET_GENRES, GET_UNCREATED, GET_VIDEOGAMES, PAGINATE, RATING_ORDER } from "../Actions/actionsTypes";
 
 const initialState = {
     videoGames: [],
     allVideoGames: [],
     detail: [],
-    genres: []
+    genres: [],
+    currentPage: 0
 };
 
 const rootReducer = (state = initialState, action) => {
+    const ITEMS_PER_PAGE = 15;
     switch (action.type) {
         case GET_VIDEOGAMES:
             return {
                 ...state,
-                videoGames: action.payload,
+                videoGames: [...action.payload].splice(0, ITEMS_PER_PAGE),
                 allVideoGames: action.payload
             };
         case GET_DETAIL:
@@ -80,6 +82,24 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 videoGames: sortedRating
             }
+
+        case PAGINATE:
+            const nextPage = state.currentPage + 1;
+            const prevPage = state.currentPage - 1;
+            const firstIndex = action.payload === "next" ? nextPage * ITEMS_PER_PAGE : prevPage * ITEMS_PER_PAGE;
+
+            if (action.payload === 'next' && firstIndex >= state.allVideoGames.length) {
+                return state
+            } else if (action.payload === "prev" && prevPage < 0) {
+                return state
+            }
+
+            return {
+                ...state,
+                videoGames: [...state.allVideoGames].splice(firstIndex, ITEMS_PER_PAGE),
+                currentPage: action.payload === "next" ? nextPage : prevPage,
+            }
+
         default:
             return { ...state }
     };
