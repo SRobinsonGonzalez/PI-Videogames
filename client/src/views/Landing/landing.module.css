@@ -1,0 +1,33 @@
+.video {
+    bottom: 0;
+    height: 100vh;
+    left: 0;
+    object-fit: cover;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100vw;
+    z-index: -1;
+}
+
+.button {
+    background: none;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 20px;
+    color: #ffffff;
+    padding: 12px 35px;
+    position: absolute;
+    bottom: 30%;
+    border-bottom: 2px solid #ffffff;
+    border-right: 2px solid #ffffff;
+    border-top: 2px solid rgba(255, 255, 255, 0.6);
+    border-left: 2px solid rgba(255, 255, 255, 0.6);
+    right: 22%;
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.button span:last-of-type {
+    color: #7ac72f;
+}
