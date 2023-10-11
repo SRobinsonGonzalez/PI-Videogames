@@ -11,21 +11,40 @@
 }
 
 .button {
-    background: none;
+    background-color: rgba(0, 0, 0, 0.200);
     font-family: 'Orbitron', sans-serif;
     font-size: 20px;
     color: #ffffff;
     padding: 12px 35px;
     position: absolute;
     bottom: 30%;
-    border-bottom: 2px solid #ffffff;
-    border-right: 2px solid #ffffff;
-    border-top: 2px solid rgba(255, 255, 255, 0.6);
-    border-left: 2px solid rgba(255, 255, 255, 0.6);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.8);
+    border-right: 2px solid rgba(255, 255, 255, 0.8);
+    border-top: 2px solid rgba(255, 255, 255, 0.4);
+    border-left: 2px solid rgba(255, 255, 255, 0.2);
     right: 22%;
-    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-    -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 4px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 4px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 4px 0px rgba(0, 0, 0, 0.75);
+
+}
+
+.button:hover {
+    transform: scale(1.1);
+    transition: 500ms;
+    box-shadow: 4px 4px 4px 0px #7ac72f;
+    -webkit-box-shadow: 4px 4px 4px 0px #7ac72f;
+    -moz-box-shadow: 4px 4px 4px 0px #7ac72f;
+}
+
+.button:not(:hover) {
+    transition: 500ms;
+}
+
+.button:active {
+    transform: scale(1);
+    box-shadow: none;
+    transition: 100ms;
 }
 
 .button span:last-of-type {

@@ -1,0 +1,85 @@
+.cardContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 400px;
+}
+
+.card {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Gruppo', sans-serif;
+    position: relative;
+    color: white;
+    width: 100%;
+    min-height: 100%;
+}
+
+.card .info {
+    opacity: 0;
+    padding: 0 1rem;
+    transition: 0.4s ease all;
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+}
+
+.card .info a {
+    background: #ffffff;
+    display: inline-block;
+    color: #000000;
+    text-decoration: none;
+    margin-bottom: 1.4em;
+    font-weight: bold;
+    border-radius: 3px;
+    padding: 0.3rem 1em;
+    transition: 0.3s ease all;
+}
+
+.card .info a:hover {
+    background: rgba(13, 200, 220, 0.950);
+    color: #ffffff;
+}
+
+.card .info a:active {
+    transform: scale(0.95);
+}
+
+
+.card:hover {
+    .info {
+        opacity: 1;
+        transform: translateY(1em);
+        bottom: 1rem;
+    }
+}
+
+.nameBox {
+    display: inline-block;
+    background-color: black;
+    border-radius: 0 2rem 2rem 0;
+    padding: 0.2em 1em 0.4em 0.8em;
+    transition: 0.4s ease-out all;
+    font-size: 1.1rem;
+    font-weight: 500;
+    position: absolute;
+    top: 25%;
+}
+
+.card:hover .nameBox {
+    top: 0;
+}
+
+.card img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+}

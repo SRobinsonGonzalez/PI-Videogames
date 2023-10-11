@@ -42,9 +42,15 @@ export const getDetailVideoGame = (id) => {
 };
 
 export const clearDetail = () => {
-    return {
-        type: CLEAR_DETAIL
-    }
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: CLEAR_DETAIL
+            });
+        } catch (error) {
+            alert(error.response.data.error);
+        };
+    };
 };
 
 export const getAllGenres = () => {
@@ -79,36 +85,66 @@ export const getGameByName = (name) => {
 };
 
 export const fiterVideoGames = (genres) => {
-    return {
-        type: FILTER_GAME,
-        payload: genres
-    }
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: FILTER_GAME,
+                payload: genres
+            });
+        } catch (error) {
+            alert(error.response.data.error);
+        };
+    };
 };
 
 export const getCreated = () => {
-    return {
-        type: GET_CREATED
-    }
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: GET_CREATED
+            });
+        } catch (error) {
+            alert(error.response.data.error);
+        };
+    };
 };
 
 export const getUnCreated = () => {
-    return {
-        type: GET_UNCREATED
-    }
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: GET_UNCREATED
+            });
+        } catch (error) {
+            alert(error.response.data.error);
+        };
+    };
 };
 
 export const alphabeticalOrder = (order) => {
-    return {
-        type: ALPHABETICAL_ORDER,
-        payload: order
-    }
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: ALPHABETICAL_ORDER,
+                payload: order
+            });
+        } catch (error) {
+            alert(error.response.data.error);
+        };
+    };
 };
 
 export const ratingOrder = (order) => {
-    return {
-        type: RATING_ORDER,
-        payload: order
-    }
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: RATING_ORDER,
+                payload: order
+            });
+        } catch (error) {
+            alert(error.response.data.error);
+        };
+    };
 };
 
 export const paginateGames = (order) => {
@@ -120,6 +156,22 @@ export const paginateGames = (order) => {
             });
         } catch (error) {
             alert(error.response.data.error);
-        }
-    }
-}
+        };
+    };
+};
+
+// export const createdGame = (form) => {
+//     return async (dispatch) => {
+//         try {
+//             axios.post('http://localhost:3001/videogames', form)
+//                 .then((response) => alert('Successfully created'))
+//                 .catch((error) => alert("Error creating video game"));
+//             return dispatch({
+//                 type: POST_GAME,
+//                 payload: data
+//             });
+//         } catch (error) {
+//             throw Error('This game does not exist');
+//         }
+//     };
+// };

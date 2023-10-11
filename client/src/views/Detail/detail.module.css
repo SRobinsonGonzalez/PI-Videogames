@@ -1,0 +1,61 @@
+.detailBox {
+    /* background: rgb(0, 70, 128); */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Gruppo', sans-serif;
+    padding: 0em 3em;
+    color: white;
+}
+
+.info .detailTop {
+    display: flex;
+}
+
+.info .detailTop .detail {
+    margin-left: 3em;
+}
+
+.detailBox img {
+    width: 50%;
+}
+
+.detail {
+    align-items: center;
+    font-size: 1.6rem;
+    width: 100%;
+}
+
+.info .detail p {
+    font-size: 1.3rem;
+}
+
+.info p {
+    font-size: 1.2rem;
+    padding-top: 1rem;
+}
+
+.info h6 {
+    font-size: 18px;
+    font-weight: 500;
+}
+.info h6 span {
+    background: rgba(13, 200, 220, 0.950);
+    color: #ffffff;
+    display: inline-block;
+    padding: 0.2rem 0.8em;
+    border-radius: 2em;
+    font-weight: bold;
+    margin-left: 0.4em;
+}
+
+.genres span {
+    background: rgba(13, 200, 220, 0.950);
+    color: #ffffff;
+    display: inline-block;
+    padding: 0.1rem 0.8em 0.3rem;
+    border-radius: 2em;
+    font-weight: bold;
+    font-size: 1.05rem;
+    margin-left: 0.4em;
+}

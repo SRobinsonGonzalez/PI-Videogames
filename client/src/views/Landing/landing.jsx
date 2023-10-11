@@ -4,7 +4,7 @@ import video from "../../assets/video/12.mp4"
 
 const Landing = () => {
     return (
-        <div>
+        <div className={style.landing}>
             <video
                 className={style.video}
                 src={video}

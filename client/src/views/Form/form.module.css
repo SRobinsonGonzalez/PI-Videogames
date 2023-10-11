@@ -1,0 +1,81 @@
+.form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+.video {
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+}
+
+.box {
+    background: rgba(0, 0, 0, 0.200);
+    backdrop-filter: blur(1.5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    border-radius: 2px;
+}
+
+.formContainer {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    font-family: 'Gruppo', sans-serif;
+    font-size: medium;
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 3rem;
+}
+
+.formContainer div {
+    width: 100%;
+}
+
+.submit {
+    font-family: 'Gruppo', sans-serif;
+    font-size: larger;
+    margin-top: 0.5rem;
+    right: 0;
+}
+
+.formContainer input {
+    width: 99%;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: none;
+    height: 1.5rem;
+}
+
+.formContainer select {
+    width: 100%;
+    margin-top: 0.5rem;
+    border: none;
+    height: 1.5rem;
+}
+
+.formContainer textarea {
+    width: 99%;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: none;
+}
+
+.formContainer button {
+    position: absolute;
+    right: 10%;
+}
+
+hr {
+    width: 80%;
+}

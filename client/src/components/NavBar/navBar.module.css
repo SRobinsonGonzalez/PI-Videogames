@@ -1,0 +1,70 @@
+.navContainer {
+
+    width: 210px;
+    height: 100%;
+    margin-right: 0.5rem;
+}
+
+.navBar {
+    padding-right: 1rem;
+    padding-left: 1rem;
+    padding-left: 1rem;
+}
+
+.navBar button {
+    background-color: rgba(0, 0, 0, 0.52);
+    color: white;
+    width: 100%;
+    height: 3rem;
+    border: none;
+    font-family: 'Orbitron', sans-serif;
+    font-size: medium;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+button.allGames {
+    background-color: rgba(13, 200, 220, 0.950);
+}
+
+.navBar button:hover {
+    transform: scale(1.1);
+    transition: 150ms;
+    box-shadow: 0px 0px 2px 3px rgba(13, 200, 220, 0.950)inset;
+    -webkit-box-shadow: 0px 0px 2px 3px rgba(13, 200, 220, 0.950)inset;
+    -moz-box-shadow: 0px 0px 2px 3px rgba(13, 200, 220, 0.950)inset;
+}
+
+.navBar button:not(:hover) {
+    transition: 150ms;
+}
+
+.navBar button:active {
+    transform: scale(1);
+    box-shadow: none;
+    transition: 100ms;
+}
+
+.navBar select {
+    background-color: rgba(0, 0, 0, 0.700);
+    color: white;
+    width: 100%;
+    height: 3rem;
+    border: none;
+    font-family: 'Orbitron', sans-serif;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.navBar select:hover {
+    transform: scale(1.05);
+    transition: 150ms;
+    box-shadow: 0px 0px 2px 3px rgba(13, 200, 220, 0.950)inset;
+    -webkit-box-shadow: 0px 0px 2px 3px rgba(13, 200, 220, 0.950)inset;
+    -moz-box-shadow: 0px 0px 2px 3px rgba(13, 200, 220, 0.950)inset;
+}
+
+.navBar select:not(:hover) {
+    transition: 150ms;
+}

@@ -1,6 +1,6 @@
 const Validation = (input) => {
     let errors = {};
-    let platformsRegex = /^[A-Za-z0-9]+(?:, [A-Za-z0-9]+)*$/;
+    let platformsRegex = /^[A-Za-z0-9-]+(?:, [A-Za-z0-9-]+)*$/;
 
     if (!input.name) {
         errors.name = "Enter name";
@@ -15,16 +15,13 @@ const Validation = (input) => {
         errors.platforms = "You must write at least one platform";
     }
     if (!platformsRegex.test(input.platforms)) {
-        errors.platforms = "The name must not have spaces and each platform must be separated by a comma.";
+        errors.platforms = "Each platform must be separated by comma.";
     }
     if (!input.genres.length === 0) {
         errors.genres = "Select at least one genre";
     }
     if (!input.image) {
         errors.image = "Upload an image";
-    }
-    if (!input.genres.length) {
-        errors.genres = "Select at least one genre";
     }
     if (!input.released) {
         errors.released = "Enter a release date";

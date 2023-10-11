@@ -11,9 +11,9 @@ import {
     getUnCreated,
     ratingOrder
 } from "../../redux/Actions/actions";
+import style from "./navBar.module.css"
 
 const NavBar = () => {
-    const allVideoGames = useSelector((state) => state.allVideoGames);
     const genres = useSelector((state) => state.genres);
     const dispatch = useDispatch();
 
@@ -45,45 +45,80 @@ const NavBar = () => {
     };
 
     return (
-        <div>
-            <Link to="/home" onClick={allVideoGames}>Home</Link>
-            <Link to="/form">Form</Link>
-            <div>
-                <select
-                    name="rating"
-                    placeholder="Rating"
-                    onChange={ratingHandler}>
-                    <option value=''>Sort by rating</option>
-                    <option value='Upward'>Upward</option>
-                    <option value='Falling'>Falling</option>
-                </select>
+        <div className={style.navContainer}>
+            <div className={style.navBar}>
+                <Link to="/home" className={style.videoHome}>
+                    <button>Home</button>
+                </Link>
+                <Link to="/form">
+                    <button>Form</button>
+                </Link>
 
-                <button value="AllGames" onClick={handleAllGames}>All Games</button>
+                <div>
+                    <button
+                        value='created'
+                        onClick={handleCreatedButton}>Created
+                    </button>
+                </div>
 
-                <select
-                    name="alphabetical"
-                    placeholder="Alphabetical"
-                    onChange={handleSort}>
-                    <option value=''>Sort by name</option>
-                    <option value='Up'>Upward</option>
-                    <option value='Fall'>Falling</option>
-                </select>
-                Falling
-                <select name="select2" placeholder="Gender" onChange={handleFilter}>
-                    <option>Genre selection</option>
-                    {genres.map((genre) => (
-                        <option
-                            key={genre.id}
-                            value={genre.name}>
-                            {genre.name}
-                        </option>
-                    ))}
-                </select>
+                <div>
+                    <button
+                        value='uncreated'
+                        onClick={handleUnCreatedButton}>Uncreated
+                    </button>
+                </div>
 
-                <button value='Created' onClick={handleCreatedButton}>Created</button>
-                <button value='Uncreated' onClick={handleUnCreatedButton}>Uncreated</button>
+                <div >
+                    <button
+                        className={style.allGames}
+                        value="AllGames"
+                        onClick={handleAllGames}>All Games
+                    </button>
+                </div>
 
-            </div>
+                <div>
+                    <select
+                        name="rating"
+                        placeholder="Rating"
+                        onChange={ratingHandler}>
+                        <option value=''>Sort by rating</option>
+                        <option value='Falling'>5➡0</option>
+                        <option value='Upward'>0➡5</option>
+                    </select>
+                </div>
+
+                <div>
+                    <select
+                        name="alphabetical"
+                        placeholder="Alphabetical"
+                        onChange={handleSort}>
+                        <option value=''>Sort by name</option>
+                        <option value='Fall'>Z-A</option>
+                        <option value='Up'>A-Z</option>
+                    </select>
+                </div>
+
+                <div>
+                    <select
+                        className={style.genres}
+                        name="select2"
+                        placeholder="Gender"
+                        onChange={handleFilter}>
+                        <option>Genre selection</option>
+                        {genres.map((genre) => (
+                            <option
+                                key={genre.id}
+                                value={genre.name}>
+                                {genre.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <style>
+                    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+                </style>
+            </div >
         </div>
     )
 };
