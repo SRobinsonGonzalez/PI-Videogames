@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import style from "./landing.module.css";
-import video from "../../assets/video/12.mp4"
+import video from "../../assets/video/03.mp4"
 
 const Landing = () => {
     return (
@@ -12,6 +12,7 @@ const Landing = () => {
                 muted
                 loop>
             </video>
+            <h1>VIDEOGAMES</h1>
             <Link to="/home">
                 <button
                     className={style.button}>

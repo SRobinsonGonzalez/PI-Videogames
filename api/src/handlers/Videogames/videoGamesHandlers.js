@@ -28,7 +28,6 @@ const getVideogamesByNameHandler = async (req, res) => {
     }
 };
 
-//? POST ______________________________________________________________________________________________
 
 const postVideogamesHandler = async (req, res) => {
     try {

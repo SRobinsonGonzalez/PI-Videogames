@@ -53,7 +53,7 @@ const NavBar = () => {
                 <Link to="/form">
                     <button>Form</button>
                 </Link>
-
+                <h4>Filtros</h4>
                 <div>
                     <button
                         value='created'

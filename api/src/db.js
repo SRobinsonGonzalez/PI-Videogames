@@ -13,7 +13,7 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
 VideogameFunction(sequelize);
 GenreFunction(sequelize);
 
-const { Videogame, Genre, Platform, Favorite, User } = sequelize.models;
+const { Videogame, Genre } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);

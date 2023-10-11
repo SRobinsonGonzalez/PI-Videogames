@@ -1,5 +1,6 @@
 const { Router } = require('express');
-const { postVideogamesHandler } = require('../../handlers/Videogames/videoGamesHandlers')
+const { postVideogamesHandler } = require('../../Handlers/Videogames/videoGamesHandlers');
+
 
 const postGamesRouter = Router();
 

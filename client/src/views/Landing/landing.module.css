@@ -1,3 +1,19 @@
+.landing {
+    align-items: center;
+    display: flex;
+    min-height: 100vh;
+}
+.landing h1 {
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    font-size: 3rem;
+    max-width: 1em;
+    margin-left: 12%;
+    word-break: break-all;
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+}
+
 .video {
     bottom: 0;
     height: 100vh;
@@ -17,12 +33,12 @@
     color: #ffffff;
     padding: 12px 35px;
     position: absolute;
-    bottom: 30%;
+    bottom: 18%;
     border-bottom: 2px solid rgba(255, 255, 255, 0.8);
     border-right: 2px solid rgba(255, 255, 255, 0.8);
     border-top: 2px solid rgba(255, 255, 255, 0.4);
     border-left: 2px solid rgba(255, 255, 255, 0.2);
-    right: 22%;
+    right: 47%;
     box-shadow: 10px 10px 4px 0px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: 10px 10px 4px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 10px 10px 4px 0px rgba(0, 0, 0, 0.75);
@@ -32,9 +48,9 @@
 .button:hover {
     transform: scale(1.1);
     transition: 500ms;
-    box-shadow: 4px 4px 4px 0px #7ac72f;
-    -webkit-box-shadow: 4px 4px 4px 0px #7ac72f;
-    -moz-box-shadow: 4px 4px 4px 0px #7ac72f;
+    box-shadow: 4px 4px 4px 0px #bd2fc7;
+    -webkit-box-shadow: 4px 4px 4px 0px #bd2fc7;
+    -moz-box-shadow: 4px 4px 4px 0px #bd2fc7;
 }
 
 .button:not(:hover) {
@@ -48,5 +64,5 @@
 }
 
 .button span:last-of-type {
-    color: #7ac72f;
+    color: #bd2fc7;
 }

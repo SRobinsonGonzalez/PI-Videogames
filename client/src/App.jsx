@@ -3,7 +3,7 @@ import { Detail, Form, Home, Landing } from "./views"
 import NavBar from "./components/NavBar/navBar"
 import style from "./App.module.css";
 import SearchBar from "./components/SearchBar/searchBar";
-import video from "./assets/video/11.mp4"
+import video from "./assets/video/03.mp4"
 
 function App() {
   const location = useLocation()
