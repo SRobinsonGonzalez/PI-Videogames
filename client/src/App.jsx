@@ -29,9 +29,7 @@ function App() {
           </video>
         </div>}
 
-
-
-      <div className={style.appContainer}>
+      <div className={`${style.appContainer} ${(location.pathname !== "/") ? style.internal : ""}`}>
         <div className={style.navBar}>
           {location.pathname !== "/" && <NavBar />}
         </div>
@@ -44,7 +42,6 @@ function App() {
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/home" element={<Home />} />
         </Routes>
-
       </div>
     </div>
   )

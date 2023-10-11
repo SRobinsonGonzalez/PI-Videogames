@@ -21,6 +21,7 @@ const SearchBar = () => {
 
     return (
         <div className={style.searchBar}>
+            {errors && <p>{errors}</p>}
             <input
                 className={style.search}
                 type="search"
@@ -31,7 +32,6 @@ const SearchBar = () => {
             </input>
 
             <button className={style.searchButton} onClick={searchHandler}>🔎</button>
-            {errors && <p>{errors}</p>}
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
             </style>

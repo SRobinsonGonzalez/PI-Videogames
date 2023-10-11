@@ -17,9 +17,10 @@
     height: 2.5rem;
     border-radius: 2rem;
     color: white;
+    padding: 0 1em;
 }
 
-.searchButton{
+.searchButton {
     background-color: transparent;
     width: 4%;
     height: 2.8rem;
@@ -39,4 +40,11 @@
 .searchButton:active {
     transform: scale(1);
     transition: 100ms;
+}
+
+.searchBar p {
+    font-family: 'Orbitron', sans-serif;
+    color: rgb(255, 123, 0);
+    position: absolute;
+    right: 5.7em;
 }

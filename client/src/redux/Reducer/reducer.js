@@ -44,21 +44,22 @@ const rootReducer = (state = initialState, action) => {
                 videoGames: action.payload
             };
 
+        // Filter genre
         case FILTER_GAME:
             const filteredGames = state.allVideoGames.filter((game) => {
                 return game.genres.includes(action.payload);
             });
             return {
                 ...state,
+                pageVideoGames: [...filteredGames],
                 videoGames: filteredGames.splice(0, ITEMS_PER_PAGE),
-                pageVideoGames: filteredGames
             };
 
         case GET_CREATED:
             const createdGames = state.allVideoGames.filter((game) => game.created === true);
             return {
                 ...state,
-                videoGames: createdGames,
+                videoGames: createdGames.splice(0, ITEMS_PER_PAGE),
                 pageVideoGames: createdGames
             };
 
@@ -66,7 +67,7 @@ const rootReducer = (state = initialState, action) => {
             const uncreatedGames = state.allVideoGames.filter((game) => game.created === false);
             return {
                 ...state,
-                videoGames: uncreatedGames,
+                videoGames: uncreatedGames.splice(0, ITEMS_PER_PAGE),
                 pageVideoGames: uncreatedGames
             };
 
@@ -84,7 +85,7 @@ const rootReducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                videoGames: sortedList,
+                videoGames: sortedList.splice(0, ITEMS_PER_PAGE),
                 pageVideoGames: sortedList
             };
 
@@ -94,13 +95,20 @@ const rootReducer = (state = initialState, action) => {
                     return a.rating - b.rating;
                 } else if (action.payload === 'Falling') {
                     return b.rating - a.rating;
-                }
+                };
             });
-
-            return {
-                ...state,
-                videoGames: sortedRating.splice(0, ITEMS_PER_PAGE),
-                pageVideoGames: ratingGame
+            if (Object.keys(sortedRating).length <= 15) {
+                return {
+                    ...state,
+                    videoGames: sortedRating,
+                    pageVideoGames: sortedRating
+                };
+            } else {
+                return {
+                    ...state,
+                    videoGames: sortedRating.splice(0, ITEMS_PER_PAGE),
+                    pageVideoGames: sortedRating
+                };
             };
 
         case PAGINATE:
